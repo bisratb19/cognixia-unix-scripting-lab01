@@ -1,4 +1,6 @@
 #!/bin/bash
+#Author: Bisrat Belay
+#Lab 01 - Febrary 11th, 2021
 
 REPORT_DATE=$(date +"%Y-%m-%d-%T")
 REPORT_FILE='report_'$REPORT_DATE'.log'
@@ -17,13 +19,13 @@ printf 'Number of processes running: '$(ps -aux | wc -l)'\n' >> $REPORT_FILE
 # 3
 printf 'Enter username to check: '
 read REPORT_USERNAME
-#
-#USER_CHECK=$(sed -n '/^$REPORT_USERNAME/p' /etc/passwd | wc -l)
-#ANSWER_USERNAME="present"
-#USER_CHECK_OUTPUT="User $REPORT_USERNAME is $ANSWER_USERNAME in /etc/passwd"
-#if [ $USER_CHECK ]; then
-#	printf $USER_CHECK_OUTPUT'\n\n' >> $REPORT_FILE
-#fi
+
+USER_CHECK=$(sed -n '/^$REPORT_USERNAME/p' /etc/passwd | wc -l)
+if [ $USER_CHECK ]; then
+	printf "User is found\n\n" >> $REPORT_FILE
+else
+	printf "User is not found\n\n" >> $REPORT_FILE
+fi
 
 # print report
 printf 'Log file name: '$REPORT_FILE'\n\n'
