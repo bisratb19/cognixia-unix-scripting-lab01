@@ -5,11 +5,13 @@
 REPORT_DATE=$(date +"%Y-%m-%d-%T")
 REPORT_FILE='report_'$REPORT_DATE'.log'
 
+IP_ADDRESS_VAR=$(ip address | cut -d ' ' -f6 | head -n 9 | tail -n 1 | cut -d'/' -f1)
+
 # 1
 
 touch $REPORT_FILE
 printf 'HOSTNAME: '$(hostname)'\n' >> $REPORT_FILE
-printf 'IP address: '$(ip address | cut -d ' ' -f6 | head -n 9 | tail -n 1 | cut -d'/' -f1)'\n' >> $REPORT_FILE
+printf 'IP address: '$IP_ADDRESS_VAR'\n' >> $REPORT_FILE
 printf 'Free memory: '$(free -mh | awk '/Mem:/ {print $4}')'\n' >> $REPORT_FILE
 printf 'Number of CPU cores: '$(lscpu | awk '/CPU/ {print $2}' | head -n 2 | tail -n 1)'\n' >> $REPORT_FILE
 
